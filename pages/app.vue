@@ -18,7 +18,7 @@
             <p>{{task.description}}</p>
           </span>
           <span id="actions">
-            <input @click="tesdt()" v-model="status" type="checkbox" name="check" id="check">
+            <input @click="completed(this)" type="checkbox" name="check" id="check">
             <p @click="destroy(task.id)">Trash</p>
             <p>Edit</p>
           </span>
@@ -30,26 +30,43 @@
 
 <script setup>
 const tasks = ref();
-let data = await $fetch('https://blokchainology.com/api/api/v1/tasks/');
-tasks.value = data.data;
 
+let sendes = {
+  id: localStorage.getItem("userid")
+}
+
+let data = $fetch('https://blokchainology.com/api/api/v1/tasks/' , {
+  method: "POST",
+  body: JSON.stringify(sendes)
+});
+ data.then(res => show(res));
+
+ function show (r){
+    if(r.info.status_code == 200){
+      tasks.value = r.data
+    }else {
+      alert('Error')
+    }
+
+ }
 let title2 = ""
 let desc = ""
 function add(){
-  const dat = {
-    user_id: 1,
-    title: title2,
-    description: desc,
-    completed: 0
-  }
-  const ap = $fetch('https://blokchainology.com/api/api/v1/tasks/' , {
-    method: "POST",
-    body: JSON.stringify(dat)
-  });
+  if(localStorage.getItem('userid')){
+    const dat = {
+      user_id: localStorage.getItem('userid'),
+      title: title2,
+      description: desc,
+      completed: 0
+    }
+    const ap = $fetch('https://blokchainology.com/api/api/v1/tasks/' , {
+      method: "POST",
+      body: JSON.stringify(dat)
+    });
 
-  let data2 = $fetch('https://blokchainology.com/api/api/v1/tasks/');
-  tasks.value = data2.data;
-}
+    let data2 = $fetch('https://blokchainology.com/api/api/v1/tasks/');
+    tasks.value = data2.data;
+  }}
 
 function destroy(id){
   let conf = confirm("Are You Sure?")
@@ -67,9 +84,9 @@ function destroy(id){
   }
   
 }
-const status = ""
-function tesdt(){
-  console.log(status);
+
+function completed(e){
+    console.log(e);
 }
 </script>
 

@@ -7,20 +7,46 @@
       <h2>Login</h2>
     </div>
 
-    <div class="inps">
-      <input type="text">
-      <input type="text">
-      <input type="text">
-      <input type="text">
-      <input type="text">
-      <button>Submit</button>
+    <div  class="inps">
+      <input v-model="name2" type="text" placeholder="Name" required>
+      <input v-model="username2" type="text" placeholder="Username" required>
+      <input v-model="email2" type="email" placeholder="Email" required>
+      <input v-model="pass2" type="password" placeholder="password" required>
+      <button @click="sendDataLogin()">Submit</button>
 
     </div>
   </div>
 </template>
 
 <script setup>
+let name2 = ""
+let username2 = ""
+let email2 = ""
+let pass2 = ""
 
+  function sendDataLogin(){
+    const dates = {
+      name: name2,
+      email: email2,
+      username: username2,
+      password: pass2
+    }
+    const send = $fetch('https://blokchainology.com/api/api/v1/users/?token=adminadmin' , {
+      method: "POST",
+      body: JSON.stringify(dates)
+    });
+
+    send.then(res => validator(res));
+  }
+
+  function validator(r){
+    if(r.info.status_code == "201"){
+      alert("Login was successfully")
+      localStorage.setItem('userid', r.data.id);
+      route.push("/app")
+    }
+
+  }
 </script>
 
 
