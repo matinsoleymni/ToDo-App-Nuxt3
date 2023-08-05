@@ -12,6 +12,7 @@
         </ul>
       </div>
     </header>
+    
     <slot />
 
     <footer>
@@ -19,10 +20,6 @@
     </footer>
   </div>
 </template>
-
-<script setup>
-
-</script>
 
 <style scoped>
 * {

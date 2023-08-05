@@ -35,19 +35,22 @@
 </template>
 
 <script setup>
-
+/* All Tasks */
 const tasks = ref();
 
+/* @dev send user id to api for get Works */
 let sendes = {
   id: localStorage.getItem("userid")
 }
 
+/* ! Get User data with user id on api*/
 let data = $fetch('https://blokchainology.com/api/api/v1/tasks/' , {
   method: "POST",
   body: JSON.stringify(sendes)
 });
  data.then(res => show(res));
 
+ /* Show tasks on Front for user */
  function show (r){
     if(r.info.status_code == 200){
       title2 = ""
@@ -58,9 +61,15 @@ let data = $fetch('https://blokchainology.com/api/api/v1/tasks/' , {
     }
 
  }
+
+/* models */
 let title2 = ""
 let desc = ""
+
+/* for add new task (using api) */
 function add(){
+
+  /* check user login . then convert data to json */
   if(localStorage.getItem('userid')){
     const dat = {
       user_id: localStorage.getItem('userid'),
@@ -68,11 +77,14 @@ function add(){
       description: desc,
       completed: 0
     }
+
+    /* send req on api for confirm new task */
     const ap = $fetch('https://blokchainology.com/api/api/v1/tasks/' , {
       method: "POST",
       body: JSON.stringify(dat)
     });
 
+    /* Get All new data on Api */
     let data = $fetch('https://blokchainology.com/api/api/v1/tasks/' , {
       method: "POST",
       body: JSON.stringify(sendes)
@@ -81,7 +93,10 @@ function add(){
 
   }}
 
+/* for delete task on api*/
 function destroy(id){
+
+  /* get confirm. then delete task */
   let conf = confirm("Are You Sure?")
   if(conf){
     let del = $fetch('https://blokchainology.com/api/api/v1/tasks/', {
@@ -91,15 +106,18 @@ function destroy(id){
     }
   });
   }else {
-
+    alert("Error")
   }
   
 }
 
+/* for edit tasks */
 function edit(id){
   popup = true
   console.log(id);    
   }
+
+/* for completed tasks */
 function completed(e){
 }
 </script>

@@ -19,11 +19,14 @@
 </template>
 
 <script setup>
+
+/* models */
 let name2 = ""
 let username2 = ""
 let email2 = ""
 let pass2 = ""
 
+  /* send data to api for login user */
   function sendDataLogin(){
     const dates = {
       name: name2,
@@ -39,17 +42,16 @@ let pass2 = ""
     send.then(res => validator(res));
   }
 
+  /* validate login and show message */
   function validator(r){
     if(r.info.status_code == "201"){
       alert("Login was successfully")
       localStorage.setItem('userid', r.data.id);
-      route.push("/app")
+      route.push("/app") // have error
     }
 
   }
 </script>
-
-
 
 <style scoped>
   .main {
