@@ -19,16 +19,23 @@
           </span>
           <span id="actions">
             <input @click="completed(this)" type="checkbox" name="check" id="check">
-            <p @click="destroy(task.id)">Trash</p>
-            <p>Edit</p>
+            <p style="color: red;" @click="destroy(task.id)">Trash</p>
+            <p @click="edit(task.id)">Edit</p>
           </span>
         </li>
       </ul>
     </div>
   </div>
+  <div class="active" :class="{'d':popup}">
+    <h2>Edit :)</h2>
+    <input type="text" name="editTitle" v-model="editTitle">      
+    <input type="text" name="editdesc" v-model="editdesc">    
+    <button >Edit</button>    
+  </div>
 </template>
 
 <script setup>
+
 const tasks = ref();
 
 let sendes = {
@@ -43,9 +50,11 @@ let data = $fetch('https://blokchainology.com/api/api/v1/tasks/' , {
 
  function show (r){
     if(r.info.status_code == 200){
+      title2 = ""
+      desc   = ""
       tasks.value = r.data
     }else {
-      alert('Error')
+      alert('Login Fist')
     }
 
  }
@@ -64,8 +73,12 @@ function add(){
       body: JSON.stringify(dat)
     });
 
-    let data2 = $fetch('https://blokchainology.com/api/api/v1/tasks/');
-    tasks.value = data2.data;
+    let data = $fetch('https://blokchainology.com/api/api/v1/tasks/' , {
+      method: "POST",
+      body: JSON.stringify(sendes)
+    });
+    data.then(res => show(res));
+
   }}
 
 function destroy(id){
@@ -77,22 +90,26 @@ function destroy(id){
       "id": id
     }
   });
-
-  console.log(del);
   }else {
 
   }
   
 }
 
+function edit(id){
+  popup = true
+  console.log(id);    
+  }
 function completed(e){
-    console.log(e);
 }
 </script>
 
 
 
 <style scoped>
+  .d {
+    display: block !important;
+  }
   .inputs {
     display: flex;
     justify-content: center;
@@ -107,13 +124,18 @@ function completed(e){
     font-size: 22px;
   }
 
-  .inputs button {
+  .inputs button , .active button {
     background-color: darkcyan;
     color: white;
     border: none;
     border-radius: 5px;
     padding: 15px;
     cursor: pointer;
+  }
+
+  .active button  {
+    padding: 10px 25px;
+    margin-bottom: 10px;
   }
 
   li {
@@ -139,4 +161,19 @@ function completed(e){
     width: 30px;
     height: 30px;
   }
+
+  .active {
+    display: none;
+    position: absolute;
+    top: 350px;
+    left: 500px;
+    text-align: center;
+    background-color: aliceblue;
+  }
+
+  .active input {
+    width: 90%;
+    margin-bottom: 5px;
+  }
+
 </style>
