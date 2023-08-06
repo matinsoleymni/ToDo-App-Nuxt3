@@ -3,23 +3,23 @@
     <Title>ToDo App - Zmat24</Title>
   </Head>
   <div>
-    <div class="inputs">
-      <input v-model="title2" type="text" placeholder="Title" name="title" id="title">
-      <input v-model="desc" type="text" placeholder="Description" name="description  " id="description">
-      <button @click="add()">Add</button>
+    <div class="flex justify-center mt-10 gap-8">
+      <input class="w-full text-2xl rounded-md px-4 outline-none" v-model="title2" type="text" placeholder="Title" name="title" id="title">
+      <input class="w-full text-2xl rounded-md px-4 outline-none" v-model="desc" type="text" placeholder="Description" name="description  " id="description">
+      <button class="bg-green-700 text-gray-50 p-3 cursor-pointer rounded-md m-2" @click="add()">Add</button>
     </div>
     <hr><hr><hr>
 
     <div class="tasks">
       <ul>
-        <li v-for="task in tasks">
-          <span>
+        <li class="mt-2 bg-green-400 rounded-2xl flex justify-between" v-for="task in tasks">
+          <span class="ml-4 p-2 text-lg">
             <h3>{{task.title}}</h3>
-            <p>{{task.description}}</p>
+            <p class="ml-4 text-gray-600">{{task.description}}</p>
           </span>
           <span id="actions">
             <input @click="completed(this)" type="checkbox" name="check" id="check">
-            <p style="color: red;" @click="destroy(task.id)">Trash</p>
+            <p class="text-red-500 hover:text-red-600" @click="destroy(task.id)">Trash</p>
             <p @click="edit(task.id)">Edit</p>
           </span>
         </li>
@@ -133,46 +133,12 @@ function completed(e){
 
 
 <style scoped>
-  .d {
-    display: block !important;
-  }
-  .inputs {
-    display: flex;
-    justify-content: center;
-    margin: 25px;
-    gap: 25px;
-  }
-
-  input {
-    width: 100%;
-    border-radius: 15px;
-    padding: 5px 10px;
-    font-size: 22px;
-  }
-
-  .inputs button , .active button {
-    background-color: darkcyan;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 15px;
-    cursor: pointer;
-  }
-
   .active button  {
     padding: 10px 25px;
     margin-bottom: 10px;
   }
 
-  li {
-    background-color: antiquewhite;
-    list-style: decimal;
-    padding: 5px 15px;
-    border-radius: 15px;
-    display: flex;
-    justify-content: space-between;
-    margin: 10px 0px;
-  }
+
 
   #actions {
     display: flex;
