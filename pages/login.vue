@@ -2,17 +2,17 @@
   <Head>
     <Title>Login Page</Title>
   </Head>
-  <div class="main">
+  <div class="flex w-full items-center flex-col justify-center">
     <div class="titles">
-      <h2>Login</h2>
+      <h2 class="text-rose-400 text-2xl mt-8">Login</h2>
     </div>
 
-    <div  class="inps">
-      <input v-model="name2" type="text" placeholder="Name" required>
-      <input v-model="username2" type="text" placeholder="Username" required>
-      <input v-model="email2" type="email" placeholder="Email" required>
-      <input v-model="pass2" type="password" placeholder="password" required>
-      <button @click="sendDataLogin()">Submit</button>
+    <div  class="flex flex-col mt-8 justify-center w-4/12 gap-5">
+      <input class="p-4 rounded-lg text-xl border-2 border-solid border-rose-400" v-model="name2" type="text" placeholder="Name" required>
+      <input class="p-4 rounded-lg text-xl border-2 border-solid border-rose-400" v-model="username2" type="text" placeholder="Username" required>
+      <input class="p-4 rounded-lg text-xl border-2 border-solid border-rose-400" v-model="email2" type="email" placeholder="Email" required>
+      <input class="p-4 rounded-lg text-xl border-2 border-solid border-rose-400" v-model="pass2" type="password" placeholder="password" required>
+      <button class="bg-transparent text-green-400 rounded-md cursor-pointer text-lg relative p-2" @click="sendDataLogin()">Submit</button>
 
     </div>
   </div>
@@ -54,41 +54,13 @@ let pass2 = ""
 </script>
 
 <style scoped>
-  .main {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-  }
 
-  .inps {
-    width: 500px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .inps input {
-    padding: 15px;
-    border-radius: 5px;
-    font-size: 20px;
-  }
-
-  .inps button {
-    background-color: transparent;
-    color: rgb(166, 255, 149);
-    border-radius: 25px;
-    padding: 15px;
-    cursor: pointer;
-    font-size:  20px;
-    position: relative;
+  button {
     transition: all 0.5s;
     z-index: 1;
   }
 
-  .inps button::before {
+  button::before {
     content: "";
     height: 100%;
     width: 0%;
@@ -102,7 +74,7 @@ let pass2 = ""
 
   }
 
-  .inps button:hover::before {
+  button:hover::before {
     content: "";
     transition: all 0.5s;
     width: 100%;
