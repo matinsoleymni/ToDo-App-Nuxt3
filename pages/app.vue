@@ -12,14 +12,14 @@
 
     <div class="tasks">
       <ul>
-        <li class="mt-2 bg-green-400 rounded-2xl flex justify-between"  v-for="task in tasks">
-          <span :class="{'bg-red-400': task.completed == 'true'}" class="ml-4 p-2 text-lg">
+        <li class="mt-2 bg-green-400 rounded-2xl flex justify-between"  v-for="task in tasks" :class="{'bg-orange-600': task.completed == 'true'}">
+          <span  class="ml-4 p-2 text-lg">
             <h3>{{task.title}}</h3>
             <p class="ml-4 text-gray-600">{{task.description}}</p>
           </span>
           <span id="actions">
-            <input @click="complete(this)" type="checkbox" name="check" class="w-7 h-7">
-            <p class="text-red-500 hover:text-red-600" @click="destroy(task.id)">Trash</p>
+            <input @click="complete(task)" type="checkbox" v-bind="{checked: task.completed== 'true'}"  name="check" class="w-7 h-7">
+            <p class="text-red-100 hover:text-blue-600" @click="destroy(task.id)">Trash</p>
             <p @click="edit(task.id)">Edit</p>
           </span>
         </li>
@@ -129,7 +129,25 @@ function edit(id){
   }
 
 /* for completed tasks */
-function complete(e){
+function complete(task){
+  let datas = {
+      id: task.id,
+      title: task.title,
+      description: task.description,
+      completed: "true"
+  }
+
+  let data = $fetch('https://blokchainology.com/api/api/v1/tasks/' , {
+    method: "PUT",
+    body: JSON.stringify(datas)
+  });
+
+  let data2 = $fetch('https://blokchainology.com/api/api/v1/tasks/' , {
+    method: "POST",
+    body: JSON.stringify(sendes)
+  });
+    data.then(res => show(res));
+
 }
 </script>
 

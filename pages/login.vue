@@ -71,7 +71,7 @@ const router = useRouter()
   function logout(){
     localStorage.removeItem("userid")
     localStorage.removeItem("username")
-    route.push("/register")
+    router.push({name : "index"})
   }
   
 </script>
