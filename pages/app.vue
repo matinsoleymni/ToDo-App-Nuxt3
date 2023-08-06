@@ -12,13 +12,13 @@
 
     <div class="tasks">
       <ul>
-        <li class="mt-2 bg-green-400 rounded-2xl flex justify-between" v-for="task in tasks">
-          <span class="ml-4 p-2 text-lg">
+        <li class="mt-2 bg-green-400 rounded-2xl flex justify-between"  v-for="task in tasks">
+          <span :class="{'bg-red-400': task.completed == 'true'}" class="ml-4 p-2 text-lg">
             <h3>{{task.title}}</h3>
             <p class="ml-4 text-gray-600">{{task.description}}</p>
           </span>
           <span id="actions">
-            <input @click="completed(this)" type="checkbox" name="check" class="w-7 h-7">
+            <input @click="complete(this)" type="checkbox" name="check" class="w-7 h-7">
             <p class="text-red-500 hover:text-red-600" @click="destroy(task.id)">Trash</p>
             <p @click="edit(task.id)">Edit</p>
           </span>
@@ -126,7 +126,7 @@ function edit(id){
   }
 
 /* for completed tasks */
-function completed(e){
+function complete(e){
 }
 </script>
 
