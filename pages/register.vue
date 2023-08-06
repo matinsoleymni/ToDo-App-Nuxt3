@@ -25,6 +25,7 @@ let name2 = ""
 let username2 = ""
 let email2 = ""
 let pass2 = ""
+const router = useRoute()
 
   /* send data to api for login user */
   function sendDataLogin(){
@@ -48,7 +49,7 @@ let pass2 = ""
       alert("register was successfully")
       localStorage.setItem('userid', r.data.id);
       localStorage.setItem('username', r.data.name);
-      route.push("/app") // have error
+      router.push({name: "app"})
     }else {
       alert("ERROR")
     }

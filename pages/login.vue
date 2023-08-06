@@ -31,6 +31,8 @@ let username2 = ""
 let pass2 = ""
 let isLogin = false
 let name = ""
+const router = useRouter()
+
   /* send data to api for login user */
   function sendDataLogin(){
     const dates = {
@@ -49,10 +51,9 @@ let name = ""
   function validator(r){
     if(r.info.status_code == "200"){
       alert("Login was successfully")
-      console.log(r.data)
       localStorage.setItem('userid', r.data.id);
       localStorage.setItem('username', r.data.name);
-      route.push("/app") // have error
+      router.push({name: "app"})
     }else {
       alert("Not Found User")
       localStorage.removeItem('userid');

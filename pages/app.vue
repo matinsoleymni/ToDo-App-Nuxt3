@@ -50,6 +50,8 @@ let data = $fetch('https://blokchainology.com/api/api/v1/tasks/' , {
 });
  data.then(res => show(res));
 
+ const router = useRouter()
+
  /* Show tasks on Front for user */
  function show (r){
     if(r.info.status_code == 200){
@@ -58,6 +60,7 @@ let data = $fetch('https://blokchainology.com/api/api/v1/tasks/' , {
       tasks.value = r.data
     }else {
       alert('Login Fist')
+      router.push({ name: 'login' })
     }
 
  }
