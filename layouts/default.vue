@@ -2,7 +2,7 @@
   <div>
     <header class="flex justify-evenly items-center bg-green-50">
       <div class="right">
-        <img src="~assets/images/logo.png" alt="Logo" width="85px">
+        <img src="~assets/images/logo.png" alt="Logo" class="w-20 max-md:w-16">
       </div>
       <div class="left">
         <ul class="flex list-none text-lg gap-5">

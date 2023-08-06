@@ -7,7 +7,7 @@
       <h1 class="text-blue-600 cursor-default hover:text-green-400 text-center text-2xl mt-5">Welcome to ToDo App</h1> 
     </div>
   </div>
-  <div class="flex justify-evenly gap-6 mt-10">
+  <div class="flex justify-evenly flex-row gap-6 mt-10 max-md:flex-col">
     <div class="text-center bg-slate-300 hover:bg-slate-200 p-5 rounded-md">
       <h2 class="text-lg mb-3">Login and use App</h2>
       <button class="bg-green-600 text-gray-50 px-5 py-2 rounded-lg text-2xl hover:bg-green-700"><NuxtLink active-class="root" to="/login">Login Now </NuxtLink></button>

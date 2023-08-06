@@ -7,7 +7,7 @@
       <h2 class="text-rose-400 text-2xl mt-8">Login</h2>
     </div>
 
-    <div  class="flex flex-col mt-8 justify-center w-4/12 gap-5">
+    <div  class="flex flex-col mt-8 justify-center w-4/12 gap-5 max-md:w-10/12">
       <input class="p-4 rounded-lg text-xl border-2 border-solid border-rose-400" v-model="name2" type="text" placeholder="Name" required>
       <input class="p-4 rounded-lg text-xl border-2 border-solid border-rose-400" v-model="username2" type="text" placeholder="Username" required>
       <input class="p-4 rounded-lg text-xl border-2 border-solid border-rose-400" v-model="email2" type="email" placeholder="Email" required>

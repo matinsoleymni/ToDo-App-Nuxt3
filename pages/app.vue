@@ -3,7 +3,7 @@
     <Title>ToDo App - Zmat24</Title>
   </Head>
   <div>
-    <div class="flex justify-center mt-10 gap-8">
+    <div class="flex justify-center mt-10 flex-row gap-8 max-md:flex-col">
       <input class="w-full text-2xl rounded-md px-4 outline-none" v-model="title2" type="text" placeholder="Title" name="title" id="title">
       <input class="w-full text-2xl rounded-md px-4 outline-none" v-model="desc" type="text" placeholder="Description" name="description  " id="description">
       <button class="bg-green-700 text-gray-50 p-3 cursor-pointer rounded-md m-2" @click="add()">Add</button>
@@ -18,7 +18,7 @@
             <p class="ml-4 text-gray-600">{{task.description}}</p>
           </span>
           <span id="actions">
-            <input @click="completed(this)" type="checkbox" name="check" id="check">
+            <input @click="completed(this)" type="checkbox" name="check" class="w-7 h-7">
             <p class="text-red-500 hover:text-red-600" @click="destroy(task.id)">Trash</p>
             <p @click="edit(task.id)">Edit</p>
           </span>
@@ -133,12 +133,6 @@ function completed(e){
 
 
 <style scoped>
-  .active button  {
-    padding: 10px 25px;
-    margin-bottom: 10px;
-  }
-
-
 
   #actions {
     display: flex;
@@ -148,12 +142,6 @@ function completed(e){
     cursor: pointer;
     padding: 0px 20px;
   }
-
-  #check {
-    width: 30px;
-    height: 30px;
-  }
-
   .active {
     display: none;
     position: absolute;
