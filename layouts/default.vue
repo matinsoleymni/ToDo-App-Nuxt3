@@ -1,60 +1,22 @@
 <template>
   <div>
-    <header>
+    <header class="flex justify-evenly items-center bg-green-50">
       <div class="right">
         <img src="~assets/images/logo.png" alt="Logo" width="85px">
       </div>
       <div class="left">
-        <ul>
+        <ul class="flex list-none text-lg gap-5">
           <li><NuxtLink active-class="root" to="/">Home</NuxtLink></li>
           <li><NuxtLink active-class="root" to="/login">Login</NuxtLink></li>
           <li><NuxtLink active-class="root" to="/app">App</NuxtLink></li>
         </ul>
       </div>
     </header>
-    
+
     <slot />
 
-    <footer>
+    <footer class="flex mt-5 bg-purple-500 bottom-0 w-full absolute text-gray-50 justify-center rounded-md text-2xl">
       <p>24</p>
     </footer>
   </div>
 </template>
-
-<style scoped>
-* {
-  padding: 0 !important;
-  margin: 0 !important;
-  box-sizing: border-box;
-}
-a {
-  text-decoration: none;
-}
-header {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  background-color: aliceblue;
-}
-
-ul {
-  display: flex;
-  list-style: none;
-  gap: 15px;
-  font-size: 20px;
-}
-
-footer {
-  bottom: 0px;
-  background-color: blueviolet;
-  color: white;
-  display: flex;
-  justify-content: center;
-  font-size: 24px;
-  border-radius: 15px;
-  position: absolute;
-  width: calc(100% - 20px);
-  margin: 10px 0px ;
-}
-
-</style>
