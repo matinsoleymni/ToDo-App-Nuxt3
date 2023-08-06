@@ -45,9 +45,12 @@ let pass2 = ""
   /* validate login and show message */
   function validator(r){
     if(r.info.status_code == "201"){
-      alert("Login was successfully")
+      alert("register was successfully")
       localStorage.setItem('userid', r.data.id);
+      localStorage.setItem('username', r.data.name);
       route.push("/app") // have error
+    }else {
+      alert("ERROR")
     }
 
   }

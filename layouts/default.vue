@@ -7,7 +7,7 @@
       <div class="left">
         <ul class="flex list-none text-lg gap-5">
           <li><NuxtLink active-class="root" to="/">Home</NuxtLink></li>
-          <li><NuxtLink active-class="root" to="/login">Login</NuxtLink></li>
+          <li><NuxtLink active-class="root" to="/login">{{username}}</NuxtLink></li>
           <li><NuxtLink active-class="root" to="/app">App</NuxtLink></li>
         </ul>
       </div>
@@ -20,3 +20,12 @@
     </footer>
   </div>
 </template>
+
+<script setup>
+let username = "Login"
+if(localStorage.getItem("username")){
+  username = localStorage.getItem("username")
+}else {
+
+}
+</script>

@@ -26,7 +26,7 @@
       </ul>
     </div>
   </div>
-  <div class="active" :class="{'d':popup}">
+  <div class="active">
     <h2>Edit :)</h2>
     <input type="text" name="editTitle" v-model="editTitle">      
     <input type="text" name="editdesc" v-model="editdesc">    

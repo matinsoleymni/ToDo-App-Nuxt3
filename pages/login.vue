@@ -2,7 +2,7 @@
   <Head>
     <Title>Login Page</Title>
   </Head>
-  <div class="flex w-full items-center flex-col justify-center">
+  <div class="flex w-full items-center flex-col justify-center" :class="{'hidden': isLogin}">
     <div class="titles">
       <h2 class="text-rose-400 text-2xl mt-8">Login</h2>
     </div>
@@ -11,8 +11,12 @@
       <input class="p-4 rounded-lg text-xl border-2 border-solid border-rose-400" v-model="username2" type="text" placeholder="Username" required>
       <input class="p-4 rounded-lg text-xl border-2 border-solid border-rose-400" v-model="pass2" type="password" placeholder="password" required>
       <button class="bg-transparent text-green-400 rounded-md cursor-pointer text-lg relative p-2" @click="sendDataLogin()">Submit</button>
-      <p class="text-md text-blue-500 cursor-pointer hover:text-green-600"><NuxtLink to="/register">Create Account !</NuxtLink></p>
+      <p class=" text-md text-blue-500 cursor-pointer hover:text-green-600"><NuxtLink to="/register">Create Account !</NuxtLink></p>
     </div>
+  </div>
+
+  <div class="hidden" :class="{'flex': isLogin}">
+    <h1 class="text-blue-600">Hello</h1>
   </div>
 </template>
 
@@ -21,12 +25,10 @@
 /* models */
 let username2 = ""
 let pass2 = ""
-
+let isLogin = false
   /* send data to api for login user */
   function sendDataLogin(){
     const dates = {
-      name: name2,
-      email: email2,
       username: username2,
       password: pass2
     }
@@ -40,12 +42,22 @@ let pass2 = ""
 
   /* validate login and show message */
   function validator(r){
-    if(r.info.status_code == "201"){
+    if(r.info.status_code == "200"){
       alert("Login was successfully")
+      console.log(r.data)
       localStorage.setItem('userid', r.data.id);
+      localStorage.setItem('username', r.data.name);
       route.push("/app") // have error
+    }else {
+      alert("Not Found User")
+      localStorage.removeItem('userid');
     }
 
+  }
+
+  if(localStorage.getItem('userid')){
+    isLogin=true
+    
   }
 </script>
 
