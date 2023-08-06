@@ -105,6 +105,14 @@ function destroy(id){
       "id": id
     }
   });
+
+  let data = $fetch('https://blokchainology.com/api/api/v1/tasks/' , {
+    method: "POST",
+    body: JSON.stringify(sendes)
+  });
+    data.then(res => show(res));
+
+
   }else {
     alert("Error")
   }

@@ -4,61 +4,22 @@
   </Head>
   <div>
     <div class="title">
-      <h1>Get Started :)</h1> 
+      <h1 class="text-blue-600 cursor-default hover:text-green-400 text-center text-2xl mt-5">Welcome to ToDo App</h1> 
     </div>
   </div>
-  <div class="main">
-    <div class="login">
-      <h2>Login and use App</h2>
-      <button><NuxtLink active-class="root" to="/login">Login Now </NuxtLink></button>
+  <div class="flex justify-evenly gap-6 mt-10">
+    <div class="text-center bg-slate-300 hover:bg-slate-200 p-5 rounded-md">
+      <h2 class="text-lg mb-3">Login and use App</h2>
+      <button class="bg-green-600 text-gray-50 px-5 py-2 rounded-lg text-2xl hover:bg-green-700"><NuxtLink active-class="root" to="/login">Login Now </NuxtLink></button>
     </div>
-    <div class="App11">
-      <h2>Get Started For Free</h2>
-      <button><NuxtLink active-class="root" to="/app">Go App</NuxtLink></button>
+    <div class="text-center bg-slate-300 hover:bg-slate-200 p-5 rounded-md">
+      <h2 class="text-lg mb-3">Get Started For Free</h2>
+      <button class="bg-green-600 text-gray-50 px-5 py-2 rounded-lg text-2xl hover:bg-green-700"><NuxtLink active-class="root" to="/app">Go App</NuxtLink></button>
     </div>
   </div>
 
-  <div class="info">
-    <h3>Matin Soleymani </h3>
+  <div class="text-center mt-12 text-xl">
+    <h3 class="text-lime-500">Matin Soleymani </h3>
     <h3> Zmat24 </h3>
   </div>
-</template>
-
-<style scoped>
-  h1 {
-    text-align: center;
-  }
-
-  button {
-    background-color: green;
-    color: white;
-    font-size: 30px;
-    border-radius: 15px ;
-    border: none;
-    padding: 15px;
-  }
-
-  a {
-    color: white;
-    text-decoration: none;
-  }
-
-  .main {
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin: 50px;
-  }
-
-  .App11 , .login {
-    background-color: aqua;
-    text-align: center;
-    padding: 15px;
-    border-radius:20px ;
-  }
-
-  .info {
-    text-align: center;
-  }
-</style>
+</template> 
