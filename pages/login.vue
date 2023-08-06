@@ -15,8 +15,12 @@
     </div>
   </div>
 
-  <div class="hidden" :class="{'flex': isLogin}">
-    <h1 class="text-blue-600">Hello</h1>
+  <div class="flex justify-center">
+    <div hidden class="w-7/12 flex-col items-center mt-10 justify-center rounded-lg bg-green-300 text-gray-700" :class="{'flex': isLogin}">
+      <p class="text-2xl mt-2">Name: <span class="text-3xl text-rose-800">{{name}}</span></p>
+      <p class="bg-blue-500 cursor-pointer px-5 rounded-lg py-1 mt-5 text-gray-50"><NuxtLink to="/app">Go To App</NuxtLink></p>
+      <p @click="logout()" class="bg-red-500 cursor-pointer px-5 rounded-lg py-1 my-5 text-gray-50">LogOut</p>
+      </div>
   </div>
 </template>
 
@@ -26,6 +30,7 @@
 let username2 = ""
 let pass2 = ""
 let isLogin = false
+let name = ""
   /* send data to api for login user */
   function sendDataLogin(){
     const dates = {
@@ -55,10 +60,19 @@ let isLogin = false
 
   }
 
-  if(localStorage.getItem('userid')){
-    isLogin=true
-    
+  onMounted(()=> {
+    if(localStorage.getItem('userid')){
+      isLogin=true
+      name = localStorage.getItem("username")
+    }
+  })
+
+  function logout(){
+    localStorage.removeItem("userid")
+    localStorage.removeItem("username")
+    route.push("/register")
   }
+  
 </script>
 
 <style scoped>

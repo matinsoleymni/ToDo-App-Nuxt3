@@ -23,9 +23,13 @@
 
 <script setup>
 let username = "Login"
-if(localStorage.getItem("username")){
-  username = localStorage.getItem("username")
-}else {
 
-}
+onMounted(()=> {
+  if(localStorage.getItem("username")){
+    username = localStorage.getItem("username")
+  }else {
+
+  }
+})
+
 </script>
