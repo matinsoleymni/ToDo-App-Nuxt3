@@ -37,23 +37,29 @@
 <script setup>
 /* All Tasks */
 const tasks = ref();
+const router = useRouter()
 
 /* @dev send user id to api for get Works */
 let sendes = {
-  id: localStorage.getItem("userid")
+  id: ""
 }
 
-/* ! Get User data with user id on api*/
-let data = $fetch('https://blokchainology.com/api/api/v1/tasks/' , {
-  method: "POST",
-  body: JSON.stringify(sendes)
-});
- data.then(res => show(res));
+onMounted(()=> {
+  sendes.id = localStorage.getItem("userid")
+  GetAll()
+})
 
- const router = useRouter()
+/* ! Get User data with user id on api*/
+function GetAll(){
+  let data = $fetch('https://blokchainology.com/api/api/v1/tasks/' , {
+    method: "POST",
+    body: JSON.stringify(sendes)
+  });
+    data.then(res => show(res));
+}
 
  /* Show tasks on Front for user */
- function show (r){
+function show (r){
     if(r.info.status_code == 200){
       title2 = ""
       desc   = ""
@@ -62,8 +68,7 @@ let data = $fetch('https://blokchainology.com/api/api/v1/tasks/' , {
       alert('Login Fist')
       router.push({ name: 'login' })
     }
-
- }
+}
 
 /* models */
 let title2 = ""
@@ -88,11 +93,7 @@ function add(){
     });
 
     /* Get All new data on Api */
-    let data = $fetch('https://blokchainology.com/api/api/v1/tasks/' , {
-      method: "POST",
-      body: JSON.stringify(sendes)
-    });
-    data.then(res => show(res));
+    GetAll()
 
   }}
 
@@ -108,18 +109,10 @@ function destroy(id){
       "id": id
     }
   });
-
-  let data = $fetch('https://blokchainology.com/api/api/v1/tasks/' , {
-    method: "POST",
-    body: JSON.stringify(sendes)
-  });
-    data.then(res => show(res));
-
-
+  GetAll()
   }else {
     alert("Error")
   }
-  
 }
 
 /* for edit tasks */
@@ -142,16 +135,9 @@ function complete(task){
     body: JSON.stringify(datas)
   });
 
-  let data2 = $fetch('https://blokchainology.com/api/api/v1/tasks/' , {
-    method: "POST",
-    body: JSON.stringify(sendes)
-  });
-    data.then(res => show(res));
-
+  GetAll()
 }
 </script>
-
-
 
 <style scoped>
 
