@@ -14,8 +14,8 @@
       <ul>
         <li class="mt-2 bg-green-400 rounded-2xl flex justify-between"  v-for="task in tasks" :class="{'bg-orange-600': task.completed == 'true'}">
           <span  class="ml-4 p-2 text-lg">
-            <h3>{{task.title}}</h3>
-            <p class="ml-4 text-gray-600">{{task.description}}</p>
+            <h3 :class="{'line-through': task.completed == 'true'}" >{{task.title}}</h3>
+            <p class="ml-4 text-gray-600" :class="{'line-through': task.completed == 'true'}" >{{task.description}}</p>
           </span>
           <span class="flex items-center gap-5 cursor-pointer px-5 text-lg">
             <input @click="complete(task)" type="checkbox" v-bind="{checked: task.completed== 'true'}"  name="check" class="w-7 h-7">
