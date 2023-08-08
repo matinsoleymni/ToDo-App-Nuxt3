@@ -26,7 +26,7 @@
       </ul>
     </div>
   </div>
-  <div v-show="popup" class="absolute top-1/3 left-1/4 bg-blue-500 p-10 rounded-lg text-center">
+  <div v-show="popup" class="absolute top-40 left-96 max-md:left-0 bg-blue-500 p-10 rounded-lg text-center">
     <h2 class="text-2xl mb-4">Edit Task </h2>
     <input class="w-full my-2 px-4 py-1 outline-none text-lg rounded-2xl" v-model="editTitle" type="text" name="editTitle">      
     <input class="w-full my-2 px-4 py-1 outline-none text-lg rounded-2xl" v-model="editDesc" type="text" name="editdesc">    
