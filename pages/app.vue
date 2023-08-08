@@ -17,20 +17,22 @@
             <h3>{{task.title}}</h3>
             <p class="ml-4 text-gray-600">{{task.description}}</p>
           </span>
-          <span id="actions">
+          <span class="flex items-center gap-5 cursor-pointer px-5 text-lg">
             <input @click="complete(task)" type="checkbox" v-bind="{checked: task.completed== 'true'}"  name="check" class="w-7 h-7">
             <p class="text-red-100 hover:text-blue-600" @click="destroy(task.id)">Trash</p>
-            <p @click="edit(task.id)">Edit</p>
+            <p @click="showEdit(task)">Edit</p>
           </span>
         </li>
       </ul>
     </div>
   </div>
-  <div class="active">
-    <h2>Edit :)</h2>
-    <input type="text" name="editTitle" v-model="editTitle">      
-    <input type="text" name="editdesc" v-model="editdesc">    
-    <button >Edit</button>    
+  <div v-show="popup" class="absolute top-1/3 left-1/4 bg-blue-500 p-10 rounded-lg text-center">
+    <h2 class="text-2xl mb-4">Edit Task </h2>
+    <input class="w-full my-2 px-4 py-1 outline-none text-lg rounded-2xl" v-model="editTitle" type="text" name="editTitle">      
+    <input class="w-full my-2 px-4 py-1 outline-none text-lg rounded-2xl" v-model="editDesc" type="text" name="editdesc">    
+    <input v-model="TaskData" type="hidden">    
+    <button @click="edit(TaskData)" class="bg-green-500 mx-2 text-gray-50  px-5 py-2 rounded-3xl">Edit</button>  
+    <button @click="popup = false" class="bg-red-500 text-gray-50  px-5 py-2 rounded-3xl">Cancel</button>    
   </div>
 </template>
 
@@ -38,6 +40,12 @@
 /* All Tasks */
 const tasks = ref();
 const router = useRouter()
+const base = "https://blokchainology.com/api/api/v1/tasks/"
+let editTitle = ""
+let editDesc = ""
+let TaskData = ""
+const popup = ref()
+popup.value = false
 
 /* @dev send user id to api for get Works */
 let sendes = {
@@ -51,7 +59,7 @@ onMounted(()=> {
 
 /* ! Get User data with user id on api*/
 function GetAll(){
-  let data = $fetch('https://blokchainology.com/api/api/v1/tasks/' , {
+  let data = $fetch( base, {
     method: "POST",
     body: JSON.stringify(sendes)
   });
@@ -87,7 +95,7 @@ function add(){
     }
 
     /* send req on api for confirm new task */
-    const ap = $fetch('https://blokchainology.com/api/api/v1/tasks/' , {
+    const ap = $fetch( base , {
       method: "POST",
       body: JSON.stringify(dat)
     });
@@ -103,12 +111,13 @@ function destroy(id){
   /* get confirm. then delete task */
   let conf = confirm("Are You Sure?")
   if(conf){
-    let del = $fetch('https://blokchainology.com/api/api/v1/tasks/', {
+    let del = $fetch( base, {
     method: "DELETE",
     body: {
       "id": id
     }
   });
+  // Get All data
   GetAll()
   }else {
     alert("Error")
@@ -116,10 +125,36 @@ function destroy(id){
 }
 
 /* for edit tasks */
-function edit(id){
-  popup = true
-  console.log(id);    
+function showEdit(task){
+  popup.value = true
+  TaskData = task
+  editTitle = task.title
+  editDesc  = task.description
+}
+
+function edit(task){
+  let datas = {
+    id: task.id,
+    title: editTitle,
+    description: editDesc,
+    completed: task.completed
   }
+
+  let data = $fetch(base , {
+    method: "PUT",
+    body: JSON.stringify(datas)
+  })
+  let status = ""
+  data.then(res => {
+    if(res.info.status_code == 200){
+      GetAll()
+    }else {
+      alert("Some Error")
+    }})
+
+    popup.value = false
+
+}
 
 /* for completed tasks */
 function complete(task){
@@ -127,40 +162,22 @@ function complete(task){
       id: task.id,
       title: task.title,
       description: task.description,
-      completed: "true"
+      completed: ""
   }
-
-  let data = $fetch('https://blokchainology.com/api/api/v1/tasks/' , {
-    method: "PUT",
-    body: JSON.stringify(datas)
-  });
-
-  GetAll()
+  if(task.completed == "true"){
+    datas.completed = "false"
+    let data = $fetch( base , {
+      method: "PUT",
+      body: JSON.stringify(datas)
+    });
+  }else {
+    datas.completed = "true"
+    let data = $fetch( base , {
+      method: "PUT",
+      body: JSON.stringify(datas)
+    });
+  }
+  
+GetAll()
 }
 </script>
-
-<style scoped>
-
-  #actions {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    font-size: 20px;
-    cursor: pointer;
-    padding: 0px 20px;
-  }
-  .active {
-    display: none;
-    position: absolute;
-    top: 350px;
-    left: 500px;
-    text-align: center;
-    background-color: aliceblue;
-  }
-
-  .active input {
-    width: 90%;
-    margin-bottom: 5px;
-  }
-
-</style>
