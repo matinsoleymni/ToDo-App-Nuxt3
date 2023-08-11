@@ -46,8 +46,9 @@ jobs:
             echo "Unable to determine package manager"
             exit 1
           fi
-      - name: Setup Node
-        uses: actions/setup-node@v3
+      - name: Nuxt to Github Pages
+        uses: ashkantaravati/NuxtToGithubPages@v1.0
+
         with:
           node-version: "16"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
